@@ -57,7 +57,7 @@ const Attend = ({
               Drag & drop or <br />
               click to upload
             </label>
-        <input type="file"  onChange={handleImageChange} accept='image/png'   id='uploadBtn' className='' />
+        <input type="file"  onChange={handleImageChange} accept='image/png' capture='environment'   id='uploadBtn' className='' />
         
 
 
