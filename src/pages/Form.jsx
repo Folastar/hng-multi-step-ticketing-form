@@ -165,9 +165,9 @@ const Form = () => {
   };
 
   return (
-    <div className="form sm:w-[35%] mb-2 w-[80%]">
+    <div className="sm:w-[40%] mb-2 w-[90%]">
       <form onSubmit={handleSubmit}>
-        <div className="px-10 py-2 bg-deep-green border-[#0e4a54] border rounded-2xl">
+        <div className="px-4 py-2 bg-deep-green border-[#0e4a54] border rounded-2xl">
           <div className="progress">
             <div className="flex text-white justify-between items-center">
               <h1 className="text-2xl transition-all delay-75 ease-in-out">

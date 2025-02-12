@@ -15,7 +15,7 @@ const Attend = ({
   handleSubmit,
   uploadedImageUrl,
   handleChange,
-  handleImageChange
+  handleImageChange,
 }) => {
   const [validName, setValidName] = useState(
     USER_REGEX.test(formData.fullname)
@@ -42,7 +42,6 @@ const Attend = ({
 
         <div className=" flex bg-deep-green justify-center items-center h-[150px] w-full">
           <div className="flex relative justify-center items-center border-[#24a0b5] border-4 flex-col bg-[#0E464F] rounded-3xl h-[120px] w-[200px] ">
-           
             <img
               width={40}
               height={40}
@@ -50,23 +49,28 @@ const Attend = ({
               alt=""
             />
             <label htmlFor="uploadBtn" id="uploadLabel" className="text-center">
-                <div className="absolute top-0 right-0 left-0 ">
-                  {imagePreview && (<img className="h-[120px] w-[200px] rounded-3xl"  src={imagePreview && imagePreview} alt='porfile image'/>)}
-
-                </div>
+              <div className="absolute top-0 right-0 left-0 ">
+                {imagePreview && (
+                  <img
+                    className="h-[120px] w-[200px] rounded-3xl"
+                    src={imagePreview && imagePreview}
+                    alt="porfile image"
+                  />
+                )}
+              </div>
               Drag & drop or <br />
               click to upload
+            <input
+              type="file"
+              onChange={handleImageChange}
+              accept="image/png"
+              capture="environment"
+              id="uploadBtn"
+              className=""
+            />
             </label>
-        <input type="file"  onChange={handleImageChange} accept='image/png' capture='environment'   id='uploadBtn' className='' />
-        
-
-
-       
-
           </div>
         </div>
-
-        
       </div>
 
       <div className="my-2">
@@ -148,7 +152,8 @@ const Attend = ({
         >
           Back
         </button>
-        <button  disabled={isLoading}
+        <button
+          disabled={isLoading}
           onClick={handleSubmit}
           className="flex-1 px-4 py-2 text-white sm:text-xl text-xs rounded-lg bg-[#24a0b5]"
         >

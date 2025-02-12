@@ -2,13 +2,13 @@ import React from 'react'
 
 const TicketBook = ({formData, nextPage,prevPage, uploadedImageUrl, handleSubmit, handleChange}) => {
   return (
-    <div className=''>
+    <section>
         <div className='text-white text-center my-4  '>
             <h1 className='text-xl'>Your Ticket is Booked</h1>
             <p> check your email for a copy or you can download</p>
         </div>
 
-      <div className='border-[#0e4a54] border w-[300px] mx-auto rounded-2xl p-4  bg-linear-to-b from-deep-green to to-mid-green'>
+      <div className='border-[#0e4a54] border w-fit mx-auto rounded-2xl p-2  bg-linear-to-b from-deep-green to to-mid-green'>
 
           <div>
             <h1 className='text-center text-white text-xl'>Techember fest</h1>
@@ -48,16 +48,16 @@ const TicketBook = ({formData, nextPage,prevPage, uploadedImageUrl, handleSubmit
                 <p>{formData.project ||"you want special offers"}</p>
               </div>
 
-              <img src="/TICKET.png" alt="" />
+              
               
           </div>
   
       </div>
-        <div className='btn flex justify-between items-center  gap-x-3 py-5'>
+        <div className='btn flex justify-between items-center  gap-x-3 py-3'>
             <button onClick={prevPage} className='flex-1 px-4 py-2 text-white  sm:text-xl text-xs border-[#0e4a54] border rounded-lg '>Back</button>
             <button onClick={handleSubmit}  className='flex-1 px-4 py-2 text-white sm:text-xl text-xs bg-[#24a0b5] rounded-lg'>Get free Ticket</button>
       </div>
-    </div>
+    </section>
   )
 }
 

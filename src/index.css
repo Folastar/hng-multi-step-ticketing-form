@@ -40,4 +40,10 @@
     border-radius: 5px;
   }
 
+  button:disabled{
+    color: red;
+    pointer-events: none;
+    cursor:not-allowed;
+  }
+
 }
