@@ -25,4 +25,19 @@
     display: inline-flex;
     color: red;
   }
+
+  input[type="file"]{
+      display: none;
+  }
+  #uploadLabel{
+    display: inline-block;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 15px 1.4rem;
+    background-color: transparent;
+    font-size: 1rem;
+    user-select: none;
+    border-radius: 5px;
+  }
+
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TicketBook = ({formData, nextPage,prevPage, avatarUrl, handleSubmit, handleChange}) => {
+const TicketBook = ({formData, nextPage,prevPage, uploadedImageUrl, handleSubmit, handleChange}) => {
   return (
     <div className=''>
         <div className='text-white text-center my-4  '>
@@ -15,7 +15,13 @@ const TicketBook = ({formData, nextPage,prevPage, avatarUrl, handleSubmit, handl
             <p className='text-white text-center text-xs'>04 runners road, ikoyi, lagos <br /> march 15 2025 | 7:00pm</p>
           </div>
           <figure className='w-16 h-16 bg-amber-300 mx-auto my-4'>
-              <img src={avatarUrl} alt="profile" />
+              {uploadedImageUrl && (
+                <img
+                  src={uploadedImageUrl}
+                  alt="Uploaded to Cloudinary"
+                  style={{ width: "200px", height: "70px", marginTop: "20px" }}
+                />
+              )}
               
           </figure>
 

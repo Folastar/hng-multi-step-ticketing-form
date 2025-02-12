@@ -2,6 +2,7 @@ import Form from "./pages/Form";
 import Header from "./components/Header";
 import { Routes,Route } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
+import Preview from "./components/Preview";
 import './App.css'
 import Ticket from "./pages/Ticket";
 import { ToastContainer} from 'react-toastify';
@@ -19,6 +20,8 @@ function App() {
         <Route path="/" element={<RootLayout/>}>
           <Route index element={<Form/>}/>
           <Route path="/ticket" element={<Ticket/>}/>
+          <Route path="/event" element={<Preview/>}/>
+
 
         </Route>
           
