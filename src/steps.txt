@@ -1,0 +1,24 @@
+algorithm
+1. fill form > validate forms on inputs > generate ticket on submission.
+
+
+features implementation
+1. form inputs: text input for user full name  >>> email address:email input field >>> upload user image which only accepts URL (cloudinary)
+
+2.form validation: all fields must be filled before submission >>> valid email format >>> avatar should accept cloudinary URL or any image link.
+
+
+2b: provide clear error message near validation field if any  validation fail.
+
+
+3. User inputs on form should persist eg local storage so info remain intact on reload.
+
+
+Accessibility
+
+4. ensure all form fields  hints and error message are screen reader accesible >>> user able to navigate form using only keyboard.
+
+
+
+Ticket Generation
+on successful submit generate and display confrrence ticket containig fullname, email, avatar .......ticket genration shpuld happen if valifation is passed

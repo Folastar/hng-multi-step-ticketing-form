@@ -1,0 +1,28 @@
+border-[#0e4a54] border
+
+/* TICKET */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 300px;
+height: 600px;
+left: calc(50% - 300px/2);
+top: calc(50% - 600px/2);
+
+background: #71A7AF;
+
+
+border: 1px solid #24A0B5;
+/* TICKET */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 300px;
+height: 600px;
+left: calc(50% - 300px/2);
+top: calc(50% - 600px/2);
+
+background: #71A7AF;
+border: 1px solid #24A0B5;

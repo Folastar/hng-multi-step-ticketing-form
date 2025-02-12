@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Jeju+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alatsi&display=swap');
+@import "tailwindcss";
+
+@theme{
+
+  /* --color-: linearGradient(to bottom, #02191d, #072d33) */
+  /* for bg-header */
+  --color-light-green:#031e23;
+  --color-deep-green: #02191d;
+  
+  --color-mid-green:#0d373f;
+
+  --font-roboto: "Roboto", sans-serif;
+
+
+
+  
+}
+
+
+@layer components{
+  .invalid{
+    display: inline-flex;
+    color: red;
+  }
+}
