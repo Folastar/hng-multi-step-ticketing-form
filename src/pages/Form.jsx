@@ -177,7 +177,7 @@ const handleImageChange =(e)=>{
         const image = new FormData();
         image.append("file", profileImage);
         image.append("cloud_name", "folastar");
-        image.append("upload_preset", upload_preset);
+        image.append("upload_preset", 'fola123');
 
         const response = await fetch(
           `https://api.cloudinary.com/v1_1/folastar/image/upload`,
