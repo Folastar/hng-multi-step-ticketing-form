@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<RootLayout/>}>
           <Route index element={<Form/>}/>
           <Route path="/ticket" element={<Ticket/>}/>
-          <Route path="/event" element={<Preview/>}/>
+          <Route path="/event" element={<Form/>}/>
 
 
         </Route>

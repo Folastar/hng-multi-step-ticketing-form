@@ -5,57 +5,96 @@ import TicketBook from "./TicketBook";
 import { useNavigate } from "react-router-dom";
 import Preview from "../components/Preview";
 import { toast } from "react-toastify";
-const Form = () => {
+const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_ ]{3,23}$/;
+  const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const Form = ({activeButton,handleButton}) => {
   const history = useNavigate();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(()=>{
+    const savedPage = localStorage.getItem('page')
+    return savedPage? JSON.parse(savedPage):1
+  });
   const [profileImage, setProfileImage]= useState("");
-  const [imagePreview, setImagePreview] = useState(null)
+  const [imagePreview, setImagePreview] = useState("")
   const [isLoading,setIsLoading]=useState(false)
   const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
-
+//   const [formErrors, setFormErrors] = useState({});
     const upload_preset=import.meta.env.VITE_UPLOAD_PRESET
+    const [formData, setFormData] = useState(() => {
+        const savedData = localStorage.getItem("formData");
+        return savedData
+          ? JSON.parse(savedData)
+          : {
+              fullname: "",
+              email: "",
+              number: 1,
+              project: "",
+              file:''
+              
+            };
+      });
+      
+    //  console.log(JSON.parse(savedData))
+
+      useEffect(()=>{
+        localStorage.setItem('page', JSON.stringify(page))
+      },[page])
+      useEffect(() => {
+        localStorage.setItem("formData", JSON.stringify(formData));
+      }, [formData]);
+      
+      useEffect(() => {
+        const savedFormData = localStorage.getItem("formData");
+        if (savedFormData) {
+          setFormData(JSON.parse(savedFormData));
+        }
+      }, []);
+      
+
+     
+      
 
 
 
-
-
-
-
-
-
-  const [formData, setFormData] = useState({
+//   const [formData, setFormData] = useState({
+//     fullname: "",
+//     email: "",
+//     number: 1,
+//     project: "",
+//     // file:''
+//   });
+  const [formErrors, setFormErrors] = useState({
+    profileImage: "",
     fullname: "",
     email: "",
-    number: 1,
-    project: "",
   });
-
   const FormTitles = ["", "Ticket Selection", "Attendee Details", "Ready"];
   
-  const isStep2Valid =
-  formData.email.trim() !== "" &&
-  formData.fullname.trim() !== "" &&
-  formData.project.trim() !== "";
+ 
+//   useEffect(()=>{
+//     localStorage.setItem('formData', JSON.stringify(formData))
+//   },[formData])
+// useEffect(()=>{
+//     const savedFormData=localStorage.getItem('formData') // this is used to get form data from localstorage on refresh
+//     if(savedFormData){
+//         setFormData(JSON.parse(savedFormData))
+//     }
+// },[])
   const nextPage = () => {
       if (page < 3) {
           setPage((nextPage) => nextPage + 1);
 
-          if (page === 2 && isStep2Valid) {
-        setPage(3);
-      }
+        
     }
   }; 
   
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  
-    // setProfileImage(e.target.files[0])
-    // setImagePreview(URL.createObjectURL(e.target.files[0]))
+    console.log(formData)
   };
   const handleImageChange =(e)=>{
     setProfileImage(e.target.files[0])
-    setImagePreview(URL.createObjectURL(e.target.files[0]))
+    setImagePreview(URL.createObjectURL(e.target.files[0])) //to previwe a image
 }
   const prevPage = () => {
     if (page > 1) {
@@ -63,28 +102,78 @@ const Form = () => {
     }
   };
 
-  const handleNext = () => {
-    if (isStep2Valid) {
-      // alert("goood")
-      toast.success("ticket created successfully");
-      history("/ticket");
-    } else {
-      toast.error("go back and fill all fields");
+//   const handleNext = () => {
+//     if (isStep2Valid) {
+//       // alert("goood")
+//       toast.success("ticket created successfully");
+//       navigate("/ticket");
+//     } else {
+//       toast.error("go back and fill all fields");
+//     }
+//   };
+
+  const handleNewTicket=()=>{
+    if(page===3){
+      setPage(1)
+     
+    //   setFormData(
+    //     {fullname: "",
+    //         email: "",
+    //         number: 1,
+    //         project: "",
+    //         file:''}
+    //   )
     }
-  };
+    // setUploadedImageUrl(null)
+    setProfileImage()
+    // window.location.reload()
+
+  }
+  
+console.log(profileImage)
+  
+  console.log(imagePreview)
 
 
-//this section is for the drag or click features 
 
 
 
-  const handleSubmit = async(e) => {
+
+
+
+const handleSubmit = async(e) => {
     e.preventDefault();
-    e.stopPropagation();
+    e.stopPropagation()
     // handleNext();
-    setIsLoading(true)
+    const errors= {}
+    if(!profileImage && !USER_REGEX.test(formData.fullname) &&!EMAIL_REGEX.test(formData.email) ) return toast.error('input all fields')
+    if(!profileImage){
+        errors.profileImage="foofksdms"
+        alert('dfdf')
+       return toast.error('invalid, profile image required')
+       
+       
+       
+    }
+    if(!USER_REGEX.test(formData.fullname)){
+          return toast.error("invalid, fullname should include four characters")
+          
+        }
+        if(!EMAIL_REGEX.test(formData.email)){
+             return toast.error("Email invalid,should incude @ .com")
+   
+        }
 
+    setFormErrors(errors)
+    if (Object.keys(errors).length > 0) return;
+    // setFormErrors(handleValidate(formData))
+    // setIsSubmit(true)
+    
+    
+    
+    
     try{
+        setIsLoading(true)
         let imageURL;
         if(profileImage && (profileImage.type==="image/png" || profileImage.type ==="image/jpg" || profileImage.type==="image/jpeg")){
             const image =new FormData()
@@ -104,19 +193,26 @@ const Form = () => {
             imageURL=imageData.secure_url
             setImagePreview(null)
             setUploadedImageUrl(imageURL)
+
             
-
         }
-        console.log(imageURL)
+        // else if(!profileImage){
+        //     toast.error("input required fields")
+        //     return
+        // }
+        console.log(imagePreview)
         // alert(imageURL)
-
     }catch(error){
         setIsLoading(false)
     } finally{
         setIsLoading(false)
+        setImagePreview(null)
     }
 
     
+    
+    
+
         nextPage()
        
   };
@@ -132,6 +228,8 @@ const Form = () => {
           handleChange={handleChange}
           prevPage={prevPage}
           formData={formData}
+        //   handleButton={handleButton}
+
         />
       );
       // return <Preview/>
@@ -147,6 +245,9 @@ const Form = () => {
           formData={formData}
           isLoading={isLoading}
           imagePreview={imagePreview}
+          profileImage={profileImage}
+          formErrors={formErrors}
+          
           
         />
       );
@@ -159,6 +260,10 @@ const Form = () => {
           prevPage={prevPage}
           formData={formData}
           uploadedImageUrl={uploadedImageUrl}
+          handleNewTicket={handleNewTicket}
+          handleButton={handleButton}
+        // setActiveButton={setActiveButton}
+          activeButton={activeButton}
         />
       );
     }
@@ -169,9 +274,11 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <div className="px-4 py-2 bg-deep-green border-[#0e4a54] border rounded-2xl">
           <div className="progress">
-            <div className="flex text-white justify-between items-center">
-              <h1 className="text-2xl transition-all delay-75 ease-in-out">
+            <p>{formErrors.profileImage}</p>
+            <div className="flex text-white flex-col sm:flex-row items-start justify-between sm:items-center">
+              <h1 className="text-2xl font-jeju  transition-all delay-75 ease-in-out">
                 {FormTitles[page]}
+
               </h1>
               <p>
                 Step <span>{page}</span>/3
@@ -179,20 +286,16 @@ const Form = () => {
             </div>
 
             <div className={`progress my-2  bg-light-green w-full h-1`}>
+
               <div
                 className={` bg-[#24a0b5] transition-all delay-75 h-1 ${
-                  page === 1 ? "w-[33%]" : page === 2 ? "w-[66%]" : "w-[100]"
+                  page === 1 ? "w-[33%]" : page === 2 ? "w-[66%]" : "w-[100%]"
                 } `}
               ></div>
             </div>
           </div>
 
           <div className="transition-all delay-200">{pageDisplay()}</div>
-
-          {/* <div className='btn  flex justify-between mt-2 items-center gap-x-3'>
-                            <button onClick={prevPage} className='flex-1 px-4 py-2 text-white  sm:text-xl text-xs border-[#0e4a54] border rounded-lg'>Back</button>
-                            <button onClick={nextPage} className='flex-1 px-4 py-2 text-white sm:text-xl text-xs bg-[#24a0b5] border-[#0e4a54] border rounded-lg'>{page ===1? "Next": page===2? 'Get my free ticket':'View Tickets'}</button>
-                        </div> */}
         </div>
       </form>
     </div>

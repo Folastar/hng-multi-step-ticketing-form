@@ -1,20 +1,25 @@
 import React from 'react'
+import ActiveButtonContent from '../components/ActivateButton'
+  // formErrors
+  const TicketBook = ({formData, nextPage, handleButton,activeButton,  uploadedImageUrl, handleNewTicket, handleSubmit}) => {
 
-const TicketBook = ({formData, nextPage,prevPage, uploadedImageUrl, handleSubmit, handleChange}) => {
+      
   return (
-    <section>
-        <div className='text-white text-center my-4  '>
-            <h1 className='text-xl'>Your Ticket is Booked</h1>
-            <p> check your email for a copy or you can download</p>
+    <section className='w-full '>
+        <div className='text-white pt-3 text-center mb-8  '>
+            <h1 className='text-2xl font-jeju'>Your Ticket is Booked</h1>
+            <p className='font-jeju text-sm py-3 capitalize'> check your email for a copy or you can download</p>
         </div>
-
-      <div className='border-[#0e4a54] border w-fit mx-auto rounded-2xl p-2  bg-linear-to-b from-deep-green to to-mid-green'>
+    <div  className='parentCard border  shadow-4xl  inset-shadow-[#24a0b5] w-[80%] mx-auto border-[#24a0b5] p-4  mt-2  bg-linear-to-t via-mid-green from-light-green to-deep-green'>
+            <div className='childCard w-full'>
+      <div  className=' border-[#24a0b5] border sm:w-[70%] w-full p-4 mx-auto rounded-2xl   bg-linear-to-b from-deep-green to to-mid-green'>
 
           <div>
-            <h1 className='text-center text-white text-xl'>Techember fest</h1>
-            <p className='text-white text-center text-xs'>04 runners road, ikoyi, lagos <br /> march 15 2025 | 7:00pm</p>
+            {/* <h1 className='text-center text-white text-xl'>Techember fest</h1> */}
+            <img src="/Heading.png"  className="my-5"alt="logo" />
+            <p className='text-white text-center capitalize text-sm'> 📍 04 runners road, ikoyi, lagos <br /> march 15 2025 | 7:00pm</p>
           </div>
-          <figure className='w-16 h-16 bg-amber-300 mx-auto my-4'>
+          <figure className='w-20 h-20 bg-light-green mx-auto my-4'>
               {uploadedImageUrl && (
                 <img
                   src={uploadedImageUrl}
@@ -25,27 +30,29 @@ const TicketBook = ({formData, nextPage,prevPage, uploadedImageUrl, handleSubmit
               
           </figure>
 
-          <div className='  grid-cols-2 grid mx-auto border-[#0e4a54] border rounded-2xl'>
+          <div className='  grid-cols-2 grid overflow-hidden mx-auto border-[#0e4a54] border rounded-2xl'>
 
               <div className='text-white text-sm p-3 border-[#0e4a54] border-b border-r '>
-                  <span className='text-white/50'>Enter your name</span>
-                  <p className='text-xs text-wrap'>{formData.fullname}</p>
+                  <span className='text-white/50  capitalize text-[10px]'>Enter your name</span>
+                  <p className='text-sm text-wrap'>{formData.fullname}</p>
               </div>
               <div className='text-white text-sm p-3 border-[#0e4a54] border-b '>
-              <span className='text-white/50'>Enter your Email</span>
-              <p className='text-xs text-wrap'>{formData.email}</p>
+              <span className='text-white/50 capitalize text-[10px]'>Enter your Email</span>
+              <p className='text-sm text-wrap'>{formData.email}</p>
               </div>
               <div className='text-white text-sm p-3 border-[#0e4a54] border-b border-r '>
-                <span className='text-white/50'>Ticket Type</span>
-                <p className='text-xs text-wrap'>{formData.fullname}</p>
+                <span className='text-white/50 capitalize text-[10px]'>Ticket Type</span>
+                <p className='text-sm text-wrap' onClick={handleButton}>{activeButton}</p>
+                <p className='text-sm text-wrap'><ActiveButtonContent activeButton={activeButton}/></p>
+
               </div>
               <div className='text-white text-sm p-3 border-[#0e4a54] border-b '>
-                <span className='text-white/50'>Ticket For</span>
-                <p className='text-xs text-wrap'>{formData.number}</p>
+                <span className='text-white/50 capitalize text-[10px]'>Ticket For</span>
+                <p className='text-sm text-wrap'>{formData.number}</p>
               </div>
               <div className='text-white col-span-2 text-sm p-3'>
-                <span className='text-white/50'>Special Request?</span>
-                <p>{formData.project ||"you want special offers"}</p>
+                <span className='text-white/50 capitalize text-sm'>Special Request?</span>
+                <p>{formData.project ||"Nil? or the users sad story they write in there, gets the whole space, Max of three rows."}</p>
               </div>
 
               
@@ -53,9 +60,15 @@ const TicketBook = ({formData, nextPage,prevPage, uploadedImageUrl, handleSubmit
           </div>
   
       </div>
-        <div className='btn flex justify-between items-center  gap-x-3 py-3'>
-            <button onClick={prevPage} className='flex-1 px-4 py-2 text-white  sm:text-xl text-xs border-[#0e4a54] border rounded-lg '>Back</button>
-            <button onClick={handleSubmit}  className='flex-1 px-4 py-2 text-white sm:text-xl text-xs bg-[#24a0b5] rounded-lg'>Get free Ticket</button>
+        </div>
+
+    </div>
+    <div className='inset-shadow-light-green w-[80%] mx-auto border-[#24a0b5] p-4 border   bg-radial via-mid-green from-light-green to-deep-green'>
+      <img src="/Bar Code.png" className='mx-auto' alt="bar code" />
+    </div>
+        <div className='btn flex justify-between items-center relative gap-x-3 py-3'>
+            <button onClick={handleNewTicket} className='flex-1 px-4 py-2 text-white  sm:text-xl text-xs border-[#0e4a54] border rounded-lg '>Book Another ticket</button>
+            <button onClick={handleSubmit}  className='flex-1 px-4 py-2 text-white sm:text-xl text-xs bg-[#24a0b5] rounded-lg'>Download Ticket</button>
       </div>
     </section>
   )

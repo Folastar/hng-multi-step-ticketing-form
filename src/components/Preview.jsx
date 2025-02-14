@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Preview = ({imageURL}) => {
 
-    const [profileImage, setProfileImage]= useState("");
+    // const [profileImage, setProfileImage]= useState("");
     const [imagePreview, setImagePreview] = useState(null)
     const [isLoading,setIsLoading]=useState(false)
     const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
@@ -48,6 +48,7 @@ const Preview = ({imageURL}) => {
         }
         finally{
             setIsLoading(false)
+            setProfileImage('')
 
         }
     }
@@ -56,7 +57,7 @@ const Preview = ({imageURL}) => {
 
 
 
-    
+
   return (
     
       <section className="flex justify-center">

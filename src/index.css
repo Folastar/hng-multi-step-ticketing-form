@@ -9,10 +9,12 @@
   /* for bg-header */
   --color-light-green:#031e23;
   --color-deep-green: #02191d;
-  
+  --color-next-green:#24a0b5;
   --color-mid-green:#0d373f;
-
+  --color-btn-green:#12464E;
+  --color-mild-green:#197686;
   --font-roboto: "Roboto", sans-serif;
+  --font-jeju:'JejuMyeongjo',"poppins"
 
 
 
@@ -44,6 +46,71 @@
     color: red;
     pointer-events: none;
     cursor:not-allowed;
+  }
+
+
+
+
+  .parentCard{
+    background: radial-gradient(circle at top left,  transparent 50px #ddd 0);
+    /* background-color: red; */
+    position: relative;
+    /* overflow: hidden; */
+    /* border-radius: 20px; */
+    border: 4px solid green;
+    /* z-index: -30; */
+  }
+  .parentCard::before,
+  .parentCard::after{
+    clip-path: circle(50%);
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: aliceblue;
+      border-radius: 50%;
+      /* z-index: -20; */
+    @apply bg-deep-green;
+
+  }
+  
+  .parentCard::before{
+    top:-25px;
+    left: -25px;
+  }
+  .parentCard::after{
+    bottom: -30px;
+    right: -25px;
+  }
+  
+  .childCard{
+    background: radial-gradient(circle at top left,  transparent 50px #ddd 0);
+    /* background-color: red; */
+    position: relative;
+    border-radius: 20px;
+  }
+  
+  
+  .childCard::before,
+  .childCard::after{
+    clip-path: circle(50% 0%, 100% 100%, 0% 100%);
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: aliceblue;
+    border-radius: 50%;
+  @apply bg-deep-green
+  }
+
+  .childCard::before{
+    top:-40px;
+    right: -40px;
+  }
+
+  .childCard::after{
+    bottom: -50px;
+    left: -40px;
   }
 
 }
