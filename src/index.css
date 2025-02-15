@@ -49,11 +49,15 @@
   }
 /* bg-linear-to-b from-deep-green to to-mid-green */
 
-.bg-image{
+/* .bg-image{
   background: url(${uploadedImageUrl});
   height: 300px;
+} */
+.img-container{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
 .parentCard{
     background: url('/bg.png');
     background-size:100% 100%;

@@ -27,7 +27,7 @@ const TicketBook = ({
             </div>
           <div
             style={{ backgroundImage: `url(${uploadedImageUrl})` }}
-            className="sm:w-40 w-30 absolute    sm:top-35 left-0 right-0 sm:h-30 h-30 bg-mid-green border-mild-green border-3 rounded-lg  mx-auto my-4 "
+            className="sm:w-40 w-30 absolute  img-container   sm:top-35 left-0 right-0 sm:h-30 h-30 bg-mid-green border-mild-green border-3 rounded-lg  mx-auto my-4 "
           ></div>
 
           <div className="  absolute sm:bottom-[145px] bottom-[195px] p-4 left-0 right-0 w-[60%] h-[30%] grid-cols-2 place-content-center bg-mid-green grid mt-10  mx-auto border-[#0e4a54] border-2 rounded-2xl">
