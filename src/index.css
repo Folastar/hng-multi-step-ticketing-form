@@ -55,8 +55,8 @@
 }
 
 .parentCard{
-    background: url('/TICKET (1).png');
-    background-size:80% 100%;
+    background: url('/bg.png');
+    background-size:100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     height: 100vh;
