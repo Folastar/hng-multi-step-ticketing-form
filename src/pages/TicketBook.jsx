@@ -27,10 +27,10 @@ const TicketBook = ({
             </div> */}
           <div
             style={{ backgroundImage: `url(${uploadedImageUrl})` }}
-            className="sm:w-48 w-36 absolute   bg-image top-29 left-0 right-0 sm:h-40 h-38 bg-mid-green border-mild-green border-3 rounded-lg  mx-auto my-4 "
+            className="sm:w-48 w-30 absolute   bg-image sm:top-40 top-36 left-0 right-0 sm:h-40 h-44 bg-mid-green border-mild-green border-3 rounded-lg  mx-auto my-4 "
           ></div>
 
-          <div className="  absolute bottom-[145px] p-4 left-0 right-0 w-[65%] h-[30%] grid-cols-2 place-content-center bg-mid-green grid mt-10  mx-auto border-[#0e4a54] border-2 rounded-2xl">
+          <div className="  absolute sm:bottom-[145px] bottom-[175px] p-4 left-0 right-0 w-[65%] h-[30%] grid-cols-2 place-content-center bg-mid-green grid mt-10  mx-auto border-[#0e4a54] border-2 rounded-2xl">
             <div className="text-white text-sm  border-[#0e4a54] border-b-2 border-r-2 ">
               <span className="text-white/50  capitalize text-[10px]">
                 Enter your name
