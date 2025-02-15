@@ -10,7 +10,7 @@ const Form = () => {
   const history = useNavigate();
   const [page, setPage] = useState(() => {
     const savedPage = localStorage.getItem("page");
-    return savedPage ? JSON.parse(savedPage) : 1;
+    return savedPage ? JSON.parse(savedPage) : 3;
   });
   const [profileImage, setProfileImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +27,6 @@ const Form = () => {
           project: "",
         };
   });
-
-  //  console.log(JSON.parse(savedData))
 
   const [activeButton, setActiveButton] = useState(() => {
     const savedData = localStorage.getItem("activeButton");
@@ -58,16 +56,12 @@ const Form = () => {
     }
   }, []);
 
-
   const [formErrors, setFormErrors] = useState({
     profileImage: "",
     fullname: "",
     email: "",
   });
   const FormTitles = ["", "Ticket Selection", "Attendee Details", "Ready"];
-
-  
-
 
   const nextPage = () => {
     if (page < 3) {
@@ -81,40 +75,46 @@ const Form = () => {
     console.log(formData);
   };
 
+  const [imagePreview, setImagePreview] = useState(() => {
+    return localStorage.getItem("imagePreview") || null;
+  });
 
-
-const [imagePreview, setImagePreview] = useState(() => {
-    return localStorage.getItem('imagePreview') || null;
-});
-
-// Save to local storage whenever imagePreview changes
-useEffect(() => {
+  // Save to local storage whenever imagePreview changes
+  useEffect(() => {
     if (imagePreview) {
-        localStorage.setItem('imagePreview', imagePreview);
-    } else {
-        localStorage.removeItem('imagePreview');
+      localStorage.setItem("imagePreview", imagePreview);
+    }      
+     else {
+      localStorage.removeItem("imagePreview");
     }
-}, [imagePreview]);
+  }, [imagePreview]);
 
-// Handle image selection
-// const handleImageChange = (e) => {
-//     const file = e.target.files[0];
-//     if (file) {
-//         const previewURL = URL.createObjectURL(file);
-//         setImagePreview(previewURL);  // Set state and persist
-//     }
-// };
-const handleImageChange =(e)=>{
-    setProfileImage(e.target.files[0])
-    setImagePreview(URL.createObjectURL(e.target.files[0]))
-}
+  // Handle image selection
+  // const handleImageChange = (e) => {
+  //     const file = e.target.files[0];
+  //     if (file) {
+  //         const previewURL = URL.createObjectURL(file);
+  //         setImagePreview(previewURL);  // Set state and persist
+  //     }
+  // };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]; //target only one element in a file || accepts onylone input
+    if (file) {
+      setProfileImage(e.target.files[0]);
+      setImagePreview(URL.createObjectURL(e.target.files[0])); // creates a local url to preview your file
+    } else {
+      setProfileImage('')
+      setImagePreview(null); 
+
+      // setImagePreview(null);
+    }
+  };
 
   const prevPage = () => {
     if (page > 1) {
       setPage((prevPage) => prevPage - 1);
     }
   };
-
 
   const handleNewTicket = () => {
     if (page === 3) {
@@ -126,24 +126,17 @@ const handleImageChange =(e)=>{
         email: "",
         number: 1,
         project: "",
-        file: "",
       });
 
       // Clear image states
       setProfileImage(null);
       setImagePreview(null);
-    //   setUploadedImageUrl(null);
 
       // Clear form data from local storage
       localStorage.removeItem("formData");
       localStorage.removeItem("activeButton");
-
     }
   };
-
-  console.log(profileImage);
-
-  console.log(imagePreview);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -155,14 +148,19 @@ const handleImageChange =(e)=>{
       !EMAIL_REGEX.test(formData.email)
     )
       return toast.error("input all fields");
-   
+
+    if (!profileImage) {
+      return toast.error("upload profile picture");
+    }
     if (!USER_REGEX.test(formData.fullname)) {
-      return toast.error("invalid, fullname should include four characters");
+      return toast.error(
+        "FullName Invalid, should include at least four characters"
+      );
     }
     if (!EMAIL_REGEX.test(formData.email)) {
-      return toast.error("Email invalid,should incude @ .com");
+      return toast.error("Email invalid, should inculde @ .com");
     }
-
+    // if(!)
     setFormErrors(errors);
     if (Object.keys(errors).length > 0) return;
     try {
@@ -177,13 +175,13 @@ const handleImageChange =(e)=>{
         const image = new FormData();
         image.append("file", profileImage);
         image.append("cloud_name", "folastar");
-        image.append("upload_preset", 'fola123');
+        image.append("upload_preset", "fola123");
 
         const response = await fetch(
           `https://api.cloudinary.com/v1_1/folastar/image/upload`,
           {
             method: "POST",
-            body: image,
+            body: image, // tthis is what is content sent to cloudinary
           }
         );
 
@@ -192,16 +190,15 @@ const handleImageChange =(e)=>{
         setImagePreview(null);
         setUploadedImageUrl(imageURL);
       }
-     
+
       console.log(imagePreview);
     } catch (error) {
       setIsLoading(false);
     } finally {
-      setIsLoading(false);
-      setImagePreview(null);
+      setIsLoading(false); // stops isLoading state after data is gotten from cloudinary
     }
 
-    nextPage();
+    nextPage(); //moves you to the next page
   };
 
   const pageDisplay = () => {

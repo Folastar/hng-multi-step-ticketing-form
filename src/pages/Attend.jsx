@@ -48,7 +48,7 @@ const Attend = ({
               id="uploadLabel"
               className="text-center "
             >
-              <div className="absolute top-0 right-0 bottom-0 left-0 ">
+              <div  className="absolute h-full top-0 right-0 bottom-0 left-0 ">
                 {imagePreview && (
                   <>
                     <img
@@ -56,7 +56,7 @@ const Attend = ({
                       src={imagePreview && imagePreview}
                     />
                   </>
-                )}
+                ) }
               </div>
               Drag & drop or <br />
               click to upload
@@ -159,6 +159,7 @@ const Attend = ({
           id="project"
           rows={3}
           placeholder="textarea"
+          maxLength={40}
         ></textarea>
       </div>
 

@@ -18,7 +18,7 @@ const TicketSelection = ({ formData, nextPage, activeButton, handleButton, handl
           <p className="text-white capitalize font-jeju py-4   text-sm leading-loose">
             join us for an unforgetable experience at <br />
             [Event Name]!. Secure your spot now. <br />
-            Event Location || March 15, 2025 | 7:00 PM{" "}
+            📍 Event Location || March 15, 2025 | 7:00 PM{" "}
           </p>
         </div>
         <div className="w-full h-[3px] my-5 rounded-full bg-[#0e4a54]/70"></div>
@@ -32,7 +32,7 @@ const TicketSelection = ({ formData, nextPage, activeButton, handleButton, handl
               activeButton === "Free" ? "bg-mid-green" : ""
             } border-mild-green border-2 py-1  px-1 rounded-xl`}
           >
-            <span className="  rounded-sm text-[1.2rem] ">Free</span>
+            <span className="  rounded-sm text-left font-bold text-[1.2rem] ">Free</span>
             <div className="leading-loose my-1 text-left">
               <h1 className="text-xs text-[#fafafa] uppercase ">
                 Regular Access
@@ -49,7 +49,7 @@ const TicketSelection = ({ formData, nextPage, activeButton, handleButton, handl
               activeButton === "VIP" ? "bg-mid-green" : ""
             } border-2 border-mild-green  py-1  px-1 rounded-xl`}
           >
-            <span className=" pr-2 rounded-sm text-[1.2rem] ">$150</span>
+            <span className=" pr-2 text-left rounded-sm text-[1.2rem] font-bold ">$150</span>
             <div className="leading-loose my-1 text-left">
               <h1 className="text-xs text-[#fafafa] uppercase">vip Access</h1>
               <p className="text-xs text-[#fafafa]">20/52</p>
@@ -63,7 +63,7 @@ const TicketSelection = ({ formData, nextPage, activeButton, handleButton, handl
               activeButton === "VVIP" ? "bg-mid-green" : ""
             } justify-around  border-mild-green border-2 py-1  px-1 rounded-xl`}
           >
-            <span className=" pr-2 rounded-sm text-[1.2rem] ">$150</span>
+            <span className=" pr-2 rounded-sm text-[1.2rem] text-left font-bold ">$150</span>
             <div className="leading-loose my-1 text-left">
               <h1 className="text-xs text-[#fafafa] uppercase ">vvip Access</h1>
               <p className="text-xs text-[#fafafa]">20/52</p>
