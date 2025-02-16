@@ -119,7 +119,6 @@ const Form = () => {
   const handleNewTicket = () => {
     if (page === 3) {
       setPage(1);
-
       // Clear form data state
       setFormData({
         fullname: "",
@@ -223,6 +222,7 @@ const Form = () => {
           uploadedImageUrl={uploadedImageUrl}
           prevPage={prevPage}
           formData={formData}
+          activeButon={activeButton}
           isLoading={isLoading}
           imagePreview={imagePreview}
           profileImage={profileImage}

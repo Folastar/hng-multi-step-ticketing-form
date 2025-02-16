@@ -9,6 +9,8 @@ const Attend = ({
   imagePreview,
   isLoading,
   handleSubmit,
+  activeButon,
+  handleButton,
   uploadedImageUrl,
   handleChange,
   handleImageChange,
@@ -178,7 +180,7 @@ const Attend = ({
           {isLoading ? (
             <p className="animate animate-bounce ease-in-out">Loading ...</p>
           ) : (
-            "Get Free Ticket"
+            `Get My ${activeButon} Ticket`
           )}
         </button>
       </div>
